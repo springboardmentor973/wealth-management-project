@@ -1,23 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">
-        <h2>FinanceApp</h2>
+    // Main Navbar Container: Flexbox, dark gray bg, white text, padding, shadow
+    <nav className="flex justify-between items-center bg-gray-900 text-white p-4 shadow-lg">
+      
+      {/* 1. App Name/Logo */}
+      <div className="text-2xl font-bold tracking-wide text-blue-400">
+        FinanceApp
       </div>
-      
-      <ul className="navbar-links">
-        {/* These links match the routes Anitha is creating */}
-        <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
+
+      {/* 2. Navigation Links */}
+      <ul className="flex space-x-8">
+        <li>
+          <Link to="/dashboard" className="hover:text-blue-300 transition duration-300 font-medium">
+            Dashboard
+          </Link>
+        </li>
+        <li>
+          <Link to="/login" className="hover:text-blue-300 transition duration-300 font-medium">
+            Login
+          </Link>
+        </li>
+        <li>
+          <Link to="/register" className="hover:text-blue-300 transition duration-300 font-medium">
+            Register
+          </Link>
+        </li>
       </ul>
-      
-      <div className="navbar-logout">
-        <button className="logout-btn">Logout</button>
+
+      {/* 3. Logout Button */}
+      <div>
+        <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+          Logout
+        </button>
       </div>
     </nav>
   );
