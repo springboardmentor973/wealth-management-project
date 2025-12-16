@@ -15,6 +15,39 @@ Add your code:
 
 Backend → put in backend/
 
+    # Backend Setup & Run Guide
+
+    This backend is built using **FastAPI**.
+
+    Follow the steps below to run the backend locally.
+
+    ---
+
+    ## 1️⃣ Create Virtual Environment
+
+    ### Windows
+        ```bash/terminal```
+        python -m venv venv
+        venv\Scripts\activate
+
+    ### Macos/Linux ###
+        python3 -m venv venv
+        source venv/bin/activate
+
+    ## 2️⃣ change directory and download requirements
+        ```change directory```
+            cd backend
+        
+        ```Download Requirements```
+            pip install -r requirements.txt
+    
+    ## 3️⃣ Run the backend
+        
+        uvicorn app.main:app --reload
+
+
+
+
 Frontend → put in frontend/
 
 Save work:
