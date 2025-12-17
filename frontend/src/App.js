@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Import your Navbar
 import Navbar from "./components/Navbar";
 
-// Import the Login page you already had
+
 import Login from "./pages/Login";
 
 function App() {
