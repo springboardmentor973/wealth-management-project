@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Import your Navbar
 import Navbar from "./components/Navbar";
-
+import Dashboard from './pages/Dashboard';
 
 import Login from "./pages/Login";
 
@@ -25,9 +25,10 @@ function App() {
 
             {/* Temporary Placeholders for your Navbar links 
                (So you can click them without errors for your screenshot) */}
-            <Route path="/dashboard" element={<h2>Dashboard Page (Coming Soon)</h2>} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/goals" element={<h2>Goals Page (Coming Soon)</h2>} />
             <Route path="/portfolio" element={<h2>Portfolio Page (Coming Soon)</h2>} />
+            
           </Routes>
         </div>
       </div>
