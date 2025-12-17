@@ -18,3 +18,7 @@ def health():
 @app.get("/db")
 def database():
     return {"status": "DB connected & backend running"}
+
+@app.get("/hi")
+def hi():
+    return {"status":"new get method created by pranali"}
