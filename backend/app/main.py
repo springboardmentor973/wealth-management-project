@@ -1,15 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.routers import auth, goals
+
 app = FastAPI(title="Wealth Management API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "http://localhost:3001"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.get("/health")
 def health():
@@ -18,3 +21,8 @@ def health():
 @app.get("/db")
 def database():
     return {"status": "DB connected & backend running"}
+
+app.include_router(auth.router)
+app.include_router(goals.router)
+
+
