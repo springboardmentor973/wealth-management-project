@@ -45,6 +45,30 @@ Backend → put in backend/
         
         uvicorn app.main:app --reload
 
+        ### Commom Issues ###
+
+            ### Uvicorn Not Recognized ###
+                make sure virtual environment is activated:- 
+                
+                ```windows```
+                venv\Scripts\activate
+
+                ```Macos/Linux```
+                source venv/bin/activate
+
+    ### Creating the .env file ###
+        
+        create a file named .env in the backend folder and add
+            SECRET_KEY=your_secret_key
+            ALGORITHM=HS256
+            DB_URL=DATABASE_URL = "postgresql://postgres:Welcome%40123@localhost:5432/      wealth_database"
+    
+    ### Accesing Swagger documents ###
+
+        open browser and go to (or ctrl+click):-
+        http://127.0.0.1:8000/docs
+        
+    
 
 
 
