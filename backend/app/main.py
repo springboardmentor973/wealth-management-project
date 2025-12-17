@@ -21,7 +21,7 @@ def database():
     return {"status": "DB connected & backend running"}
 
 @app.get("/task1")
-def task1():
+def task():
     return {"status":" task 1 is completed"}
 
 app.include_router(auth.router)
