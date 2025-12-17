@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    // We MUST wrap everything in Router for the Navbar links to work
+    
     <Router>
       <div className="app-container">
         {/* This places the Navbar at the top of every page */}
