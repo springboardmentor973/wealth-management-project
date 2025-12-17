@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.routers import auth, goals
 
 app = FastAPI(title="Wealth Management API")
 
@@ -19,6 +20,9 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-@app.get("/hi")
-def hi():
-    return {"status":"new get method created by pranali"}
+@app.get("/task1")
+def task1():
+    return {"status":" task 1 is completed"}
+
+app.include_router(auth.router)
+app.include_router(goals.router)
