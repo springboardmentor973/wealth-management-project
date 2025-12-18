@@ -31,17 +31,11 @@ def database():
 def hi():
     return {"status":"new get message created "}
 
-@app.get("/task")
-def tasks():
-    return {"status":"Task1 completed"}
+@app.get("/hello")
+def hello():    
+    return {"status":"hello from backend task1"}
 
-@app.get("/task2")
-def tasks2():
-    return {"status":"Task2 completed add goals router"}
 
-@app.get("/task3")
-def tasks3():
-    return {"status":"Task3 completed DB initialization added"}
 
 app.include_router(auth.router)
 app.include_router(goals.router)
