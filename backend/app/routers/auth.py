@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 
-router=APIRouter()
+router=APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/register")
 def register():
