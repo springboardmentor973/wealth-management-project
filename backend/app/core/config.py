@@ -12,6 +12,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(
     os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30)
 )
 
-# Using same secret for now
-REFRESH_SECRET_KEY = SECRET_KEY
+# # Using same secret for now
+# REFRESH_SECRET_KEY = SECRET_KEY
 
