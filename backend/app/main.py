@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, goals
 
+
 app = FastAPI(title="Wealth Management API")
 
 app.add_middleware(
@@ -27,6 +28,10 @@ def hi():
 @app.get("/task")
 def tasks():
     return {"status":"Task1 completed"}
+
+@app.get("task2")
+def tasks2():
+    return {"status":"Task2 Goals router added"}
 
 app.include_router(auth.router)
 app.include_router(goals.router)
