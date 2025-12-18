@@ -39,6 +39,9 @@ def tasks():
 def tasks2():
     return {"status":"Task2 completed add goals router"}
 
+@app.get("/task3")
+def tasks3():
+    return {"status":"Task3 completed DB initialization added"}
 
 app.include_router(auth.router)
 app.include_router(goals.router)
