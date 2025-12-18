@@ -30,15 +30,15 @@ export default function Dashboard() {
 
             <div className="mb-6">
               <h3 className="mb-3 text-xs font-semibold tracking-wider text-gray-400 uppercase">Components</h3>
-              <a href="#" className="flex items-center px-4 py-3 space-x-3 text-gray-700 transition-colors rounded-lg hover:bg-gray-100">
+              <a href="/goals" className="flex items-center px-4 py-3 space-x-3 text-gray-700 transition-colors rounded-lg hover:bg-gray-100">
                 <Target className="w-5 h-5" />
                 <span>Goals</span>
               </a>
-              <a href="#" className="flex items-center px-4 py-3 space-x-3 text-gray-700 transition-colors rounded-lg hover:bg-gray-100">
+              <a href="/portfolio" className="flex items-center px-4 py-3 space-x-3 text-gray-700 transition-colors rounded-lg hover:bg-gray-100">
                 <Briefcase className="w-5 h-5" />
                 <span>Portfolio</span>
               </a>
-              <a href="#" className="flex items-center px-4 py-3 space-x-3 text-gray-700 transition-colors rounded-lg hover:bg-gray-100">
+              <a href="/profile" className="flex items-center px-4 py-3 space-x-3 text-gray-700 transition-colors rounded-lg hover:bg-gray-100">
                 <User className="w-5 h-5" />
                 <span>Profile</span>
               </a>
@@ -149,9 +149,11 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <button className="mt-6 w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                View Goals
-              </button>
+              <a href="/goals">
+                <button className="mt-6 w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                  Go to Goals
+                </button>
+              </a>
             </div>
 
             {/* Portfolio Card */}
@@ -178,9 +180,11 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <button className="mt-6 w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition-colors font-medium">
-                View Portfolio
-              </button>
+              <a href="/portfolio">
+                <button className="mt-6 w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition-colors font-medium">
+                  Go to Portfolio
+                </button>
+              </a>
             </div>
 
             {/* Profile Card */}
@@ -203,9 +207,11 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <button className="mt-6 w-full bg-purple-600 text-white py-2.5 rounded-lg hover:bg-purple-700 transition-colors font-medium">
-                Edit Profile
-              </button>
+              <a href="/profile">
+                <button className="mt-6 w-full bg-purple-600 text-white py-2.5 rounded-lg hover:bg-purple-700 transition-colors font-medium">
+                  Go to Profile
+                </button>
+              </a>
             </div>
           </div>
 
