@@ -29,9 +29,10 @@ def hi():
 def tasks():
     return {"status":"Task1 completed"}
 
-@app.get("task2")
-def tasks2():
-    return {"status":"Task2 Goals router added"}
+@app.get("/goal")
+def task2():
+    return {"status": "Gaols router added"}
+
 
 app.include_router(auth.router)
 app.include_router(goals.router)
