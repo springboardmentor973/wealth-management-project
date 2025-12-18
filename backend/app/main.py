@@ -35,6 +35,10 @@ def hi():
 def hello():    
     return {"status":"hello from backend task1"}
 
+@app.get("/hello2")
+def hello2():    
+    return {"status":"db connected & backend running "}
+
 
 
 app.include_router(auth.router)
