@@ -6,3 +6,6 @@ class GoalCreate(BaseModel):
 
 class GoalResponse(BaseModel):
     pass
+
+class GoalProgressUpdate(BaseModel):
+    current_amount: float
