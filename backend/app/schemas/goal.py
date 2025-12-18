@@ -1,11 +1,25 @@
 from pydantic import BaseModel
+from datetime import date, datetime
+from typing import Optional
 
 class GoalCreate(BaseModel):
-    pass
-
+    goal_type: str
+    target_amount: float
+    target_date: date
+    monthly_contribution: Optional[float] = None
 
 class GoalResponse(BaseModel):
-    pass
+    id: int
+    user_id: int
+    goal_type: str
+    target_amount: float
+    target_date: date
+    monthly_contribution: Optional[float] = None
+    status: str
+    created_at: datetime
 
+    class Config:
+        from_attributes = True
+        
 class GoalProgressUpdate(BaseModel):
     current_amount: float
