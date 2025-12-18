@@ -20,9 +20,13 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-@app.get("/task1")
-def task():
-    return {"status":" task 1 is completed"}
+@app.get("/hi")
+def hi():
+    return {"status":"new get message created "}
+
+@app.get("/task")
+def tasks():
+    return {"status":"Task1 completed"}
 
 app.include_router(auth.router)
 app.include_router(goals.router)
