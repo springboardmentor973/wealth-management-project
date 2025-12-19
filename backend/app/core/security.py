@@ -28,3 +28,12 @@ def decode_access_token(token):
         return {"error" : "Token has expired"}
     except JWTError:
         return {"error" : "Invalid token"}
+
+def get_current_user(token):
+    userData = decode_access_token(token)
+    if userData.get("user_id"):
+        return {"user_id" : userData["user_id"]}
+    elif userData.get("email"):
+        return {"email": userData["email"]}
+    else: 
+        return {"error" : "Credentials not found"}
