@@ -1,27 +1,21 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
-// Import components
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import Portfolio from "./pages/Portfolio";
-import Goals from "./pages/Goals";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import Portfolio from './pages/Portfolio';
+import Goals from './pages/Goals';
 
 function App() {
   return (
     <BrowserRouter>
-      {/* Navigation Links */}
-      <nav style={{ display: "flex", gap: "1rem", margin: "1rem" }}>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/portfolio">Portfolio</Link>
+      <nav>
+        <Link to="/login">Login</Link> | 
+        <Link to="/register">Register</Link> | 
+        <Link to="/dashboard">Dashboard</Link> | 
+        <Link to="/portfolio">Portfolio</Link> | 
         <Link to="/goals">Goals</Link>
       </nav>
-
-      {/* Routes */}
-      <Routes>
+<Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
