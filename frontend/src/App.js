@@ -1,34 +1,32 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-// Import your Navbar
 import Navbar from "./components/Navbar";
-import Dashboard from './pages/Dashboard';
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Portfolio from "./pages/Portfolio";
+import Goals from "./pages/Goals";
 
 function App() {
   return (
-    
     <Router>
       <div className="app-container">
-        {/* This places the Navbar at the top of every page */}
         <Navbar />
 
         <div className="p-4">
           <Routes>
-            {/* Route 1: Show Login page by default */}
-            <Route path="/" element={<Login />} />
-            
-            {/* Route 2: Explicit Login path */}
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
 
-            {/* Temporary Placeholders for your Navbar links 
-               (So you can click them without errors for your screenshot) */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/goals" element={<h2>Goals Page (Coming Soon)</h2>} />
-            <Route path="/portfolio" element={<h2>Portfolio Page (Coming Soon)</h2>} />
-            
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/goals" element={<Goals />} />
+
+            <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </div>
       </div>

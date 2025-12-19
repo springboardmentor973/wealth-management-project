@@ -1,4 +1,12 @@
+import React from "react";
+
 function Login() {
-  return <h1 className="text-2xl">Login Page</h1>;
+  return (
+    <div>
+      <h1>Welcome to the Home Page</h1>
+      <p>This is the login page.</p>
+    </div>
+  );
 }
+
 export default Login;
