@@ -13,6 +13,10 @@ class Goal(Base):
 
     goal_type = Column(String, nullable=False)
     target_amount = Column(Float, nullable=False)
+
+    # NEW FIELD (Progress Tracking)
+    current_amount = Column(Float, default=0)
+
     target_date = Column(Date, nullable=False)
     monthly_contribution = Column(Float, nullable=False)
 
