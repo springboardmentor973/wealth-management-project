@@ -31,5 +31,4 @@ function Goals() {
     </div>
   );
 }
-
-export default Goal;
+export default Goals;
