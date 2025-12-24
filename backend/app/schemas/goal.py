@@ -15,6 +15,7 @@ class GoalResponse(BaseModel):
     target_amount: float
     target_date: date
     monthly_contribution: Optional[float] = None
+    current_amount: float
     status: str
     created_at: datetime
 
