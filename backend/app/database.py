@@ -10,12 +10,10 @@ Base = declarative_base()
 from app.models.user import User
 from app.models.goal import Goal
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
 def init_db():
-    Base.metadata.create_all(bind=engine)
+    try:
+        # Example: test connection
+        with engine.connect() as conn:
+            print("Database connection successful!")
+    except Exception as e:
+        print(f"Database connection failed: {e}")
