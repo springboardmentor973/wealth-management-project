@@ -118,6 +118,58 @@ Backend → put in backend/
 
 Frontend → put in frontend/
 
+###Errors Section:-
+
+    ### 1️⃣ ModuleNotFoundError / Import Errors
+        ex:-
+            ModuleNotFoundError: No module named 'app'
+            ModuleNotFoundError: No module named 'routers'
+
+        fix:-
+            cd backend
+            uvicorn app.main:app --reload
+
+    ### 2️⃣ Uvicorn not found
+        ex:- "uvicorn not Recognised"
+        
+        Fix → Activate virtual environment and install requirements
+
+            windows:-
+                venv\Scripts\activate
+                pip install -r requirements.txt
+
+            macos/linux:-
+                source venv/bin/activate
+                pip3 install -r requirements.txt
+
+
+    ### 3️⃣ CORS Error (Frontend Cannot Call Backend)
+        ex:- "CORS policy blocked request"
+    
+        fix:- check in app/main.py
+
+            app.add_middleware(
+                CORSMiddleware,
+                allow_origins=["http://localhost:3000"],
+                allow_credentials=True,
+                allow_methods=["*"],
+                allow_headers=["*"],
+            )
+
+            if not present add it
+
+    ### 4️⃣ .env missing not loaded
+        ex:- "secret key not found"
+             "db_url missing"
+
+        fix:- create a .env file in backend and add
+
+                SECRET_KEY=your_secret
+                ALGORITHM=HS256
+                DB_URL=postgresql://user:password@localhost:5432/yourdb
+
+            after this restart the backend
+
 Save work:
 git add .
 git commit -m "message"
