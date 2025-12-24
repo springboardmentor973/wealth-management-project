@@ -38,7 +38,7 @@ def hello():
 
 @app.get("/task4")
 def task4():    
-    return {"status":"backend task4"}
+    return {"status":"conflict resolved task4"}
 
 app.include_router(auth.router)
 app.include_router(goals.router)
