@@ -1,7 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
+// Import components
+import ProtectedRoute from './Components/ProtectedRoute';
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -11,26 +12,27 @@ import Goals from "./pages/Goals";
 
 function App() {
   return (
-    <Router>
-      <div className="app-container">
-        <Navbar />
+    <BrowserRouter>
+      {/* Navigation Links */}
+      <nav style={{ display: "flex", gap: "1rem", margin: "1rem" }}>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/portfolio">Portfolio</Link>
+        <Link to="/goals">Goals</Link>
+      </nav>
 
-        <div className="p-4">
-          <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
+      {/* Routes */}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/goals" element={<ProtectedRoute><Goals /></ProtectedRoute>} />
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/goals" element={<Goals />} />
-
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          </Routes>
-        </div>
-      </div>
-    </Router>
+        
+      </Routes>
+    </BrowserRouter>
   );
 }
 

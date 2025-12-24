@@ -14,7 +14,10 @@ function Goals() {
   return (
     <div style={{ maxWidth: "500px", margin: "2rem auto", textAlign: "center" }}>
       <h1>My Goals</h1>
-      <form onSubmit={addGoalHandler} style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
+      <form
+        onSubmit={addGoalHandler}
+        style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}
+      >
         <input
           type="text"
           value={newGoal}
@@ -31,5 +34,4 @@ function Goals() {
     </div>
   );
 }
-
-export default Goal;
+export default Goals;
