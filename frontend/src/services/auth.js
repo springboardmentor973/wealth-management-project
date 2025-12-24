@@ -1,0 +1,10 @@
+import axios from "axios";
+
+export async function login(email, password) {
+  try {
+    const response = await axios.post("http://127.0.0.1:8000/auth/login", { email, password });
+    return response.data; // should contain token
+  } catch (error) {
+    throw error.response?.data?.detail || "Login failed";
+  }
+}
