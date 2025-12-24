@@ -1,7 +1,11 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/goals", tags=["Goals"])
+router = APIRouter(
+    prefix="/goals",
+    tags=["Goals"]
+)
 
+# Example endpoint (optional for Swagger display)
 @router.get("/")
-def list_goals():
-    return {"message": "Goals route working"}
+def read_goals():
+    return {"message": "Goals endpoint is working"}
