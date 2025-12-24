@@ -4,6 +4,7 @@ from app.routers import auth, goals
 # Import the database initialization function
 from app.database import init_db
 
+
 app = FastAPI(title="Wealth Management API")
 
 app.add_middleware(
@@ -35,9 +36,9 @@ def hi():
 def hello():    
     return {"status":"hello from backend task1"}
 
-@app.get("/hello2")
-def hello2():    
-    return {"status":"hello from backend task4"}
+@app.get("/task4")
+def task4():    
+    return {"status":"backend task4"}
 
 app.include_router(auth.router)
 app.include_router(goals.router)
