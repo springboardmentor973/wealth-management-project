@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from app.routers import auth, goals
+# Import the database initialization function
 from app.database import init_db
+
 
 app = FastAPI(title="Wealth Management API")
 
@@ -29,16 +30,15 @@ def database():
 
 @app.get("/hi")
 def hi():
-    return {"status": "new get message created"}
+    return {"status":"new get message created "}
 
 @app.get("/hello")
-def hello():
-    return {"status": "hello from backend task1"}
+def hello():    
+    return {"status":"hello from backend task1"}
 
-@app.get("/hello2")
-def hello2():
-    return {"status": "db connected & backend running"}
+@app.get("/task4")
+def task4():    
+    return {"status":"conflict resolved task4"}
 
-# Routers
 app.include_router(auth.router)
 app.include_router(goals.router)
