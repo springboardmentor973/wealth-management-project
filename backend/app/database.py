@@ -1,11 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-
-DATABASE_URL = "postgresql://postgres:Welcome%40123@localhost:5432/wealth_database"
+from app.core.config import DATABASE_URL
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+# IMPORTANT: import models so tables are registered
+from app.models import user
+from app.models import investment
 
 def get_db():
     db = SessionLocal()
