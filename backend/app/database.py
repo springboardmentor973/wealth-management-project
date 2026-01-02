@@ -12,9 +12,4 @@ from app.models.goal import Goal
 from app.models.transaction import Transaction
 
 def init_db():
-    try:
-        # Example: test connection
-        with engine.connect() as conn:
-            print("Database connection successful!")
-    except Exception as e:
-        print(f"Database connection failed: {e}")
+    Base.metadata.create_all(bind=engine)
