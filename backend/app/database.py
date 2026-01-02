@@ -9,6 +9,7 @@ Base = declarative_base()
 
 from app.models.user import User
 from app.models.goal import Goal
+from app.models.transaction import Transaction
 
 def init_db():
     try:
