@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, goals
+from app.routers import portfolio
 # Import the database initialization function
 from app.database import init_db
 
@@ -28,13 +29,7 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-@app.get("/hi")
-def hi():
-    return {"status":"new get message created "}
 
-@app.get("/hello")
-def hello():    
-    return {"status":"hello from backend task1"}
 
 @app.get("/task4")
 def task4():    
@@ -42,3 +37,4 @@ def task4():
 
 app.include_router(auth.router)
 app.include_router(goals.router)
+app.include_router(portfolio.router)
