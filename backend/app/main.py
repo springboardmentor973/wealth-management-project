@@ -1,9 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, goals
+# from app.routers import auth, goals
+from routers.auth import router as auth_router
+from routers.goals import router as goals_router
+from routers.progress import router as progress_router
 # Import the database initialization function
-from app.database import init_db
-from app.models import goal,investment,user
+from database import init_db
+from models import goal,investment,user
 
 
 app = FastAPI(title="Wealth Management API")
@@ -41,5 +44,6 @@ def hello():
 def task4():    
     return {"status":"conflict resolved task4"}
 
-app.include_router(auth.router)
-app.include_router(goals.router)
+app.include_router(auth_router)
+app.include_router(goals_router)
+app.include_router(progress_router)

@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, Date, DateTime, ForeignKe
 from sqlalchemy.sql import func
 
 def get_base():
-    from app.base import Base
+    from base import Base
     return Base
 
 class Goal(get_base()):
