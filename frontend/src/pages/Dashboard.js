@@ -1,66 +1,92 @@
-import React from "react";
-
-const Dashboard = () => {
+export default function Dashboard() {
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
-
-      {/* Grid Layout for Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* --- GOALS SUMMARY CARD --- */}
-        <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">
-            Goals Summary
-          </h2>
-
-          {/* Dummy Goal 1 */}
-          <div className="mb-4">
-            <div className="flex justify-between mb-1">
-              <span className="text-sm font-medium text-gray-700">
-                Buy New Laptop
-              </span>
-              <span className="text-sm font-medium text-blue-600">75%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div
-                className="bg-blue-600 h-2.5 rounded-full"
-                style={{ width: "75%" }}
-              ></div>
-            </div>
-          </div>
-
-          {/* Dummy Goal 2 */}
-          <div className="mb-4">
-            <div className="flex justify-between mb-1">
-              <span className="text-sm font-medium text-gray-700">
-                Emergency Fund
-              </span>
-              <span className="text-sm font-medium text-green-600">40%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div
-                className="bg-green-500 h-2.5 rounded-full"
-                style={{ width: "40%" }}
-              ></div>
-            </div>
-          </div>
-
-          <button className="mt-4 w-full text-blue-500 hover:text-blue-700 text-sm font-semibold">
-            + Add New Goal
-          </button>
+    <div className="min-h-screen p-6 bg-gray-50">
+      <div className="mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="mb-2 text-3xl font-bold text-gray-800">
+            Personalized Wealth Management & Goal Tracker
+          </h1>
+          <p className="text-gray-600">Welcome to your financial overview</p>
         </div>
 
-        {/* Portfolio Card */}
-        <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500">
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">
-            Portfolio Value
-          </h2>
-          <p className="text-3xl font-bold text-gray-900">₹ 1,25,000</p>
-          <p className="text-green-500 text-sm mt-1">↑ 5.4% this month</p>
+        {/* Three Cards */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {/* Goals Card */}
+          <div className="p-6 bg-white rounded-lg shadow-lg">
+            <h2 className="mb-4 text-xl font-semibold text-gray-800">Goals</h2>
+            
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Goals:</span>
+                <span className="text-lg font-semibold text-gray-800">0</span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Target:</span>
+                <span className="text-lg font-semibold text-gray-800">₹0</span>
+              </div>
+              <div className="flex items-center justify-between py-2">
+                <span className="text-gray-600">Progress:</span>
+                <span className="text-lg font-semibold text-gray-800">0%</span>
+              </div>
+            </div>
+
+            <a href="/goals">
+              <button className="w-full py-2 text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
+                Go to Goals
+              </button>
+            </a>
+          </div>
+
+          {/* Portfolio Card */}
+          <div className="p-6 bg-white rounded-lg shadow-lg">
+            <h2 className="mb-4 text-xl font-semibold text-gray-800">Portfolio</h2>
+            
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Invested:</span>
+                <span className="text-lg font-semibold text-gray-800">₹0</span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Current Value:</span>
+                <span className="text-lg font-semibold text-gray-800">₹0</span>
+              </div>
+              <div className="flex items-center justify-between py-2">
+                <span className="text-gray-600">Gain/Loss:</span>
+                <span className="text-lg font-semibold text-gray-800">₹0</span>
+              </div>
+            </div>
+
+            <a href="/portfolio">
+              <button className="w-full py-2 text-white transition-colors bg-green-600 rounded-lg hover:bg-green-700">
+                Go to Portfolio
+              </button>
+            </a>
+          </div>
+
+          {/* Profile Card */}
+          <div className="p-6 bg-white rounded-lg shadow-lg">
+            <h2 className="mb-4 text-xl font-semibold text-gray-800">Profile</h2>
+            
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Name:</span>
+                <span className="text-base font-semibold text-gray-800">Demo User</span>
+              </div>
+              <div className="flex items-center justify-between py-2">
+                <span className="text-gray-600">Email:</span>
+                <span className="text-sm font-semibold text-gray-800">demo@gmail.com</span>
+              </div>
+            </div>
+
+            <a href="/profile">
+              <button className="w-full py-2 text-white transition-colors bg-purple-600 rounded-lg hover:bg-purple-700">
+                Go to Profile
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default Dashboard;
+}

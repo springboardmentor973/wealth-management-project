@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createGoal } from "../services/goal";
+import { createGoal } from "../services/goals";
 
 function Goals() {
   const [title, setTitle] = useState("");
@@ -13,7 +13,11 @@ function Goals() {
     setMessage("");
 
     try {
-      await createGoal({ title, amount });
+      await createGoal({
+        title,
+        amount: Number(amount),
+      });
+
       setMessage("✅ Goal created successfully!");
       setTitle("");
       setAmount("");
@@ -25,7 +29,7 @@ function Goals() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto" }}>
+    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
       <h2>Create Goal</h2>
 
       <form onSubmit={handleSubmit}>
