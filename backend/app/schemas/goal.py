@@ -6,7 +6,7 @@ class GoalCreate(BaseModel):
     goal_type: str
     target_amount: float
     target_date: date
-    monthly_contribution: Optional[float] = None
+    monthly_contribution: Optional[float]
 
 class GoalResponse(BaseModel):
     id: int
