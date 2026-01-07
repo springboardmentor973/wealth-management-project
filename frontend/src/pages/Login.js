@@ -1,54 +1,60 @@
 import React, { useState } from "react";
-import { login } from "../services/auth";
+import { useNavigate } from "react-router-dom";
 
-function Login({ onLogin }) {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      const data = await login(email, password);
-      localStorage.setItem("token", data.token); // save token
-      onLogin(email); // redirect to dashboard
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
+
+    // Basic validation (demo purpose)
+    if (email && password) {
+      // Persist login state
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", email);
+
+      // Redirect to protected route
+      navigate("/goals");
+    } else {
+      alert("Please enter email and password");
     }
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
+    <div style={{ maxWidth: "400px", margin: "2rem auto" }}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
-        />
-        <button type="submit" disabled={loading} style={{ padding: "10px 20px" }}>
-          {loading ? "Logging in..." : "Login"}
+
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Email</label>
+          <br />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
+        <div style={{ marginTop: "1rem" }}>
+          <label>Password</label>
+          <br />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <button style={{ marginTop: "1rem" }} type="submit">
+          Login
         </button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
-}
+};
 
 export default Login;

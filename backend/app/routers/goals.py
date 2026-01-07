@@ -1,17 +1,29 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from core.security import get_current_user
+
+###
+#  Actual router (token is required to access)
+# router = APIRouter(
+#     prefix="/goals",
+#     tags=["Goals"],
+#     dependencies=[Depends(get_current_user)]
+# )
+###
 
 router = APIRouter(
     prefix="/goals",
-    tags=["Goals"]
+    tags=["Goals"],
 )
 
-# Example endpoint (optional for Swagger display)
-@router.get("/")
-def read_goals():
-    return {"message": "Goals endpoint is working"}
+### 
+# Repeated twice (remove it)
+# @router.get("/")
+# def read_goals():
+#     return {"message": "Goals endpoint is working"}
 
-from fastapi import APIRouter
-router = APIRouter(prefix="/goals", tags=["Goals"])
+# from fastapi import APIRouter
+# router = APIRouter(prefix="/goals", tags=["Goals"])
+###
 
 # ✅ Dummy in-memory storage
 GOALS = []
@@ -42,6 +54,6 @@ def update_goal_progress(goal_id: int, data: dict):
     for g in GOALS:
         if g["id"] == goal_id:
             g["current_amount"] = data.get("current_amount",
-g["current_amount"])
+            g["current_amount"])
             return {"message": "Progress updated", "goal": g}
     return {"error": "Goal not found"}
