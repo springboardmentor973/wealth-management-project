@@ -7,7 +7,7 @@ router = APIRouter()
 @router.get("/summary")
 def portfolio_summary():
 
-    # Mock portfolio data (temporary data instead of database)
+   
     # Each item represents one asset in the portfolio
     assets = [
         {"asset": "AAPL", "quantity": 10, "price": 150},   # Apple stock
@@ -38,7 +38,7 @@ def portfolio_summary():
             "invested_amount": invested_amount   # Total invested for this asset
         })
 
-    # Final response returned to frontend / Swagger
+    # Final response 
     response = {
         "total_invested": total_invested,           # Sum of all investments
         "cost_basis": total_invested,                # Same as invested (simple version)

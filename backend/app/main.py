@@ -29,11 +29,9 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-
-
-@app.get("/task4")
-def task4():    
-    return {"status":"conflict resolved task4"}
+@app.get("/port") 
+def portf():
+    return {"message": "Welcome to the Portfolio Management API"}
 
 app.include_router(auth.router)
 app.include_router(goals.router)
