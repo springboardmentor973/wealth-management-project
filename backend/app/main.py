@@ -1,12 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-# from app.routers import auth, goals
-from routers.auth import router as auth_router
-from routers.goals import router as goals_router
-from routers.progress import router as progress_router
+from app.routers import auth, goals
 # Import the database initialization function
 from database import init_db
 from models import goal,investment,user
+from app.routers import portfolio
 
 
 app = FastAPI(title="Wealth Management API")
@@ -32,18 +30,10 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-@app.get("/hi")
-def hi():
-    return {"status":"new get message created "}
+@app.get("/port") 
+def portf():
+    return {"message": "Welcome to the Portfolio Management API"}
 
-@app.get("/hello")
-def hello():    
-    return {"status":"hello from backend task1"}
-
-@app.get("/task4")
-def task4():    
-    return {"status":"conflict resolved task4"}
-
-app.include_router(auth_router)
-app.include_router(goals_router)
-app.include_router(progress_router)
+app.include_router(auth.router)
+app.include_router(goals.router)
+app.include_router(portfolio.router, prefix="/portfolio", tags=["portfolio"])
