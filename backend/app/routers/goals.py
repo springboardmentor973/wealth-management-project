@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends
-from core.security import get_current_user
+from app.core.security import get_current_user
+from app.services.goal_projection import calculate_projection
+
 
 ###
 #  Actual router (token is required to access)
@@ -47,7 +49,22 @@ def create_goal(goal: dict):
 
 @router.get("/")
 def list_goals():
-    return {"goals": GOALS}
+    goals_with_projection = []
+
+    for g in GOALS:
+        projected = calculate_projection(
+            current_amount=g.get("current_amount") or 0,
+            monthly_contribution=g.get("monthly_contribution") or 0,
+            months_remaining=12,
+            expected_return_rate=0.0,
+        )
+
+        g_with_proj = g.copy()
+        g_with_proj["projected_value"] = projected
+
+        goals_with_projection.append(g_with_proj)
+
+    return {"goals": goals_with_projection}
 
 @router.patch("/{goal_id}/progress")
 def update_goal_progress(goal_id: int, data: dict):

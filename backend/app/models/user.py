@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, DateTime
 from datetime import datetime
 
 def get_base():
-    from base import Base
+    from app.base import Base
     return Base
 
 class User(get_base()):
