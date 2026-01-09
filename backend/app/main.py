@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import simulation
+from app.routers import auth, goals, portfolio, simulation
+
 
 app = FastAPI(title="Wealth Management API")
 
@@ -12,7 +13,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(simulation.router)
 
 @app.get("/health")
 def health():
@@ -21,3 +21,12 @@ def health():
 @app.get("/db")
 def database():
     return {"status": "DB connected & backend running"}
+
+@app.get("/port") 
+def portf():
+    return {"message": "Welcome to the Portfolio Management API"}
+
+app.include_router(auth.router)
+app.include_router(goals.router)
+app.include_router(portfolio.router, prefix="/portfolio", tags=["portfolio"])
+app.include_router(simulation.router, prefix="/simulation", tags=["simulation"])
