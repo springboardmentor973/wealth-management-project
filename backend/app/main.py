@@ -7,6 +7,7 @@ from app.models import goal,investment,user
 from app.routers import portfolio
 
 
+
 app = FastAPI(title="Wealth Management API")
 
 app.add_middleware(

@@ -1,30 +1,57 @@
-from fastapi import APIRouter   # Import APIRouter to create grouped APIs
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
-# Create a router object for portfolio-related APIs
-router = APIRouter(prefix="/portfolio", tags=["Portfolio"])
+from app.database import get_db
+from app.models.investment import Investment
 
-# This API handles GET requests at /portfolio/valuation
+router = APIRouter(
+    prefix="/portfolio",
+    tags=["Portfolio"]
+)
+
+
+@router.get("/summary")
+def portfolio_summary(db: Session = Depends(get_db)):
+    investments = db.query(Investment).all()
+
+    total_invested = 0
+    current_value = 0
+    assets = []
+
+    for inv in investments:
+        invested = inv.units * inv.avg_buy_price
+        market_value = inv.units * (inv.last_price or inv.avg_buy_price)
+
+        total_invested += invested
+        current_value += market_value
+
+        assets.append({
+            "symbol": inv.symbol,
+            "units": inv.units,
+            "invested": invested,
+            "current_value": market_value
+        })
+
+    return {
+        "total_invested": total_invested,
+        "current_value": current_value,
+        "assets": assets
+    }
+
+
 @router.get("/valuation")
-def portfolio_valuation():
-
-    # Each item represents one asset in the portfolio
-    assets = [
-        {"asset": "AAPL", "quantity": 10, "buy_price": 150, "last_price": 170},
-        {"asset": "GOOG", "quantity": 5, "buy_price": 2000, "last_price": 2100},
-        {"asset": "TSLA", "quantity": 8, "buy_price": 700, "last_price": 680},
-    ]
+def portfolio_valuation(db: Session = Depends(get_db)):
+    investments = db.query(Investment).all()
 
     total_invested = 0
     current_value = 0
 
-    # Loop through each asset
-    for item in assets:
-        total_invested += item["quantity"] * item["buy_price"]
-        current_value += item["quantity"] * item["last_price"]
+    for inv in investments:
+        total_invested += inv.units * inv.avg_buy_price
+        current_value += inv.units * inv.last_price
 
     profit_loss = current_value - total_invested
 
-    # Final response
     return {
         "total_invested": total_invested,
         "current_value": current_value,
