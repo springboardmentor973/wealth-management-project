@@ -52,3 +52,7 @@ def get_current_user(token : str = Depends(oauth_scheme)):
             detail="Invalid token payload",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+# Use this function to create a token 
+# token = create_token({'user_id': 1, 'email' : "sample-email"})
+# print(token)

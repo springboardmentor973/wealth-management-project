@@ -1,10 +1,14 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React from "react";
+import { Navigate } from "react-router-dom";
 
-const Protectedroutes = ({ children }) => {
-  const token = localStorage.getItem('token'); // or use context/auth state
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = localStorage.getItem("isLoggedIn");
 
-  return token ? children : <Navigate to="/login" />;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 };
 
-export default Protectedroutes;
+export default ProtectedRoute;
