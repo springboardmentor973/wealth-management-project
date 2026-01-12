@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, goals, simulations
-# Import the database initialization function
-from app.database import init_db
+from app.routers import auth, goals, portfolio, simulation
 
 
 app = FastAPI(title="Wealth Management API")
@@ -15,10 +13,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize the database when the application starts
-@app.on_event("startup")
-def startup_event():
-    init_db()
 
 @app.get("/health")
 def health():
@@ -28,18 +22,11 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-@app.get("/hi")
-def hi():
-    return {"status":"new get message created "}
-
-@app.get("/hello")
-def hello():    
-    return {"status":"hello from backend task1"}
-
-@app.get("/task4")
-def task4():    
-    return {"status":"conflict resolved task4"}
+@app.get("/port") 
+def portf():
+    return {"message": "Welcome to the Portfolio Management API"}
 
 app.include_router(auth.router)
 app.include_router(goals.router)
-app.include_router(simulations.router)
+app.include_router(portfolio.router, prefix="/portfolio", tags=["portfolio"])
+app.include_router(simulation.router, prefix="/simulation", tags=["simulation"])
