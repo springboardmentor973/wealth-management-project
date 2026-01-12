@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, goals
+from app.routers import auth, goals, simulations
 # Import the database initialization function
 from app.database import init_db
 
@@ -42,3 +42,4 @@ def task4():
 
 app.include_router(auth.router)
 app.include_router(goals.router)
+app.include_router(simulations.router)
