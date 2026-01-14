@@ -5,12 +5,11 @@ from core.security import get_current_user
 router = APIRouter(
     prefix ="/portfolio", 
     tags = ["Portfolio"],
-    dependencies = [Depends(get_current_user)]
 )
 
 # This API handles GET requests at /portfolio/summary
 @router.get("/summary")
-def portfolio_summary():
+def portfolio_summary(current_user : dict = Depends(get_current_user)):
     # Each item represents one asset in the portfolio
     assets = [
         {"asset": "AAPL", "quantity": 10, "price": 150},   # Apple stock
