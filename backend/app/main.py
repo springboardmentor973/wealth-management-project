@@ -1,10 +1,8 @@
+
 from fastapi import FastAPI
-
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, goals, portfolio, simulation
+from app.routers import auth, goals, portfolio, simulation, simulations
 from app.database import init_db  # Cloud DB: Ensure all tables are created
-
-
 
 # Cloud DB: Create all tables in Neon PostgreSQL at startup
 init_db()
@@ -18,7 +16,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -27,7 +24,7 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-@app.get("/port") 
+@app.get("/port")
 def portf():
     return {"message": "Welcome to the Portfolio Management API"}
 
@@ -35,3 +32,4 @@ app.include_router(auth.router)
 app.include_router(goals.router)
 app.include_router(portfolio.router, prefix="/portfolio", tags=["portfolio"])
 app.include_router(simulation.router, prefix="/simulation", tags=["simulation"])
+app.include_router(simulations.router, prefix="/simulations", tags=["simulations"])
