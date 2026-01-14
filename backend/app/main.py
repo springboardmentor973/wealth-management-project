@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, goals
 # Import the database initialization function
-from app.database import init_db
-from app.models import goal, investment, user
-from app.routers import portfolio
+from database import init_db
+from routers import auth, goals, portfolio, progress
 
 
 app = FastAPI(title="Wealth Management API")
@@ -36,4 +34,5 @@ def portf():
 
 app.include_router(auth.router)
 app.include_router(goals.router)
-app.include_router(portfolio.router, prefix="/portfolio", tags=["portfolio"])
+app.include_router(portfolio.router)
+app.include_router(progress.router)

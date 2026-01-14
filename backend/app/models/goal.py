@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, Float, Date, DateTime, ForeignKey
 from sqlalchemy.sql import func
+from base import Base
 
 def get_base():
-    from app.base import Base
     return Base
 
 class Goal(get_base()):

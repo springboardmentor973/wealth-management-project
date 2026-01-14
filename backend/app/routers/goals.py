@@ -1,31 +1,13 @@
 from fastapi import APIRouter, Depends
-from app.core.security import get_current_user
-from app.services.goal_projection import calculate_projection
+from core.security import get_current_user
+from services.goal_projection import calculate_projection
 
-
-###
 #  Actual router (token is required to access)
-# router = APIRouter(
-#     prefix="/goals",
-#     tags=["Goals"],
-#     dependencies=[Depends(get_current_user)]
-# )
-###
-
 router = APIRouter(
     prefix="/goals",
     tags=["Goals"],
+    dependencies=[Depends(get_current_user)]
 )
-
-### 
-# Repeated twice (remove it)
-# @router.get("/")
-# def read_goals():
-#     return {"message": "Goals endpoint is working"}
-
-# from fastapi import APIRouter
-# router = APIRouter(prefix="/goals", tags=["Goals"])
-###
 
 # ✅ Dummy in-memory storage
 GOALS = []

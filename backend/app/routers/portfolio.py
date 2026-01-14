@@ -1,13 +1,16 @@
-from fastapi import APIRouter   # Import APIRouter to create grouped APIs
+from fastapi import APIRouter, Depends   # Import APIRouter to create grouped APIs
+from core.security import get_current_user
 
 # Create a router object for portfolio-related APIs
-router = APIRouter()
+router = APIRouter(
+    prefix ="/portfolio", 
+    tags = ["Portfolio"],
+    dependencies = [Depends(get_current_user)]
+)
 
 # This API handles GET requests at /portfolio/summary
 @router.get("/summary")
 def portfolio_summary():
-
-   
     # Each item represents one asset in the portfolio
     assets = [
         {"asset": "AAPL", "quantity": 10, "price": 150},   # Apple stock

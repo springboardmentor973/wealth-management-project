@@ -1,16 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from core.security import get_current_user
 
-###
 #  Actual router (token is required to access)
-# router = APIRouter(
-#     prefix='/progress',
-#     dependencies=[Depends(get_current_user)]
-# )
-###
-
 router = APIRouter(
     prefix='/progress',
+    tags = ["Progress"],
+    dependencies=[Depends(get_current_user)]
 )
 
 @router.get('/')

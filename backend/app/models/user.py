@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from datetime import datetime
+from base import Base
 
 def get_base():
-    from app.base import Base
     return Base
 
 class User(get_base()):
