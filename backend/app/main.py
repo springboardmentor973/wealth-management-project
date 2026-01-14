@@ -1,8 +1,13 @@
 from fastapi import FastAPI
+
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, goals, portfolio, simulation
+from app.database import init_db  # Cloud DB: Ensure all tables are created
 
 
+
+# Cloud DB: Create all tables in Neon PostgreSQL at startup
+init_db()
 app = FastAPI(title="Wealth Management API")
 
 app.add_middleware(
