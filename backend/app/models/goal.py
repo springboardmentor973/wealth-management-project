@@ -3,7 +3,11 @@ from sqlalchemy.sql import func
 from app.database import Base
 
 def get_base():
+<<<<<<< HEAD
     from app.database import Base
+=======
+    from app.base import Base
+>>>>>>> 7fc715a18a819aef3f15b9da68e64c236fe4846f
     return Base
 
 class Goal(get_base()):
