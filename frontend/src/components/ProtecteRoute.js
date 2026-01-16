@@ -1,14 +1,17 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem("isLoggedIn");
+const PrivateRoute = () => {
+  // Step 1: Check token existence
+  const token = localStorage.getItem("isLoggedIn");
 
-  if (!isAuthenticated) {
+  // Step 2: Redirect to login if missing
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  // Step 3: Allow access to protected (simulation) routes
+  return <Outlet />;
 };
 
-export default ProtectedRoute;
+export default PrivateRoute;

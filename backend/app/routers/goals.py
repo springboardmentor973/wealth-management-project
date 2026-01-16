@@ -5,7 +5,7 @@ from services.goal_projection import calculate_projection
 #  Actual router (token is required to access)
 router = APIRouter(
     prefix="/goals",
-    tags=["Goals"],
+    tags=["Goals"]
 )
 
 # ✅ Dummy in-memory storage

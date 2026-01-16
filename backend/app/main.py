@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Import the database initialization function
 from database import init_db
 from routers import auth, goals, portfolio, progress, simulation, simulations
-
+from models import goal,investment,user
 
 app = FastAPI(title="Wealth Management API")
 
@@ -14,6 +14,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 
 @app.get("/health")

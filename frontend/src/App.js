@@ -28,7 +28,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/goals" element={<ProtectedRoute><Goals /></ProtectedRoute>} />
+      <Route element={<ProtectedRoute />}>
+  <Route path="/goals" element={<Goals />} />
+</Route>
+
 
         
       </Routes>
