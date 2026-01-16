@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, goals
 # Import the database initialization function
-from database import init_db
-from models import goal,investment,user
+from app.database import init_db
+from app.models import goal,investment,user
 from app.routers import portfolio
 
 
@@ -32,6 +32,6 @@ def portf():
 
 app.include_router(auth.router)
 app.include_router(goals.router)
-app.include_router(portfolio.router, prefix="/portfolio", tags=["portfolio"])
-app.include_router(simulation.router, prefix="/simulation", tags=["simulation"])
-app.include_router(simulations.router, prefix="/simulations", tags=["simulations"])
+app.include_router(portfolio.router)
+#app.include_router(simulation.router, prefix="/simulation", tags=["simulation"])
+#app.include_router(simulations.router, prefix="/simulations", tags=["simulations"])

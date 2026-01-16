@@ -1,10 +1,6 @@
 from sqlalchemy import Column, Integer, String, Numeric, ForeignKey, DateTime, Enum
 from sqlalchemy.sql import func
-<<<<<<< HEAD
 from app.database import Base
-=======
-from app.base import Base
->>>>>>> 7fc715a18a819aef3f15b9da68e64c236fe4846f
 import enum
 
 class AssetType(enum.Enum):
