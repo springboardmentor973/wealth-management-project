@@ -8,6 +8,7 @@ users = [
         "user_id" :0,
         "email" : "sample-email@gmail.com",
         "password" : "$2b$12$ogZ6hlj7EEaWvgTLRnAale.2I/9.MbcpXKOHjQTv6MPdavolaktSi"
+        # use password as "sample-password"
     }
 ]
 
