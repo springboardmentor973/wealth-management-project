@@ -1,20 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from core.security import get_current_user
 
-###
-#  Actual router (token is required to access)
-# router = APIRouter(
-#     prefix='/progress',
-#     dependencies=[Depends(get_current_user)]
-# )
-###
-
 router = APIRouter(
     prefix='/progress',
+    tags = ["Progress"],
 )
 
 @router.get('/')
-def return_progress():
+def return_progress(current_user : dict = Depends(get_current_user)):
     current_amount = 1000 # get from db or somewhere
     target_amount = 2000 # get from db or somewhere
     if current_amount < 0 or current_amount > target_amount:
