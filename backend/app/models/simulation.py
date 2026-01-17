@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from app.database import Base
+from database import Base
 
 class Simulation(Base):
     __tablename__ = 'simulations'

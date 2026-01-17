@@ -1,38 +1,19 @@
 from fastapi import APIRouter, Depends
-from app.core.security import get_current_user
-from app.services.goal_projection import calculate_projection
+from core.security import get_current_user
+from services.goal_projection import calculate_projection
 
-
-###
 #  Actual router (token is required to access)
-# router = APIRouter(
-#     prefix="/goals",
-#     tags=["Goals"],
-#     dependencies=[Depends(get_current_user)]
-# )
-###
-
 router = APIRouter(
     prefix="/goals",
-    tags=["Goals"],
+    tags=["Goals"]
 )
-
-### 
-# Repeated twice (remove it)
-# @router.get("/")
-# def read_goals():
-#     return {"message": "Goals endpoint is working"}
-
-# from fastapi import APIRouter
-# router = APIRouter(prefix="/goals", tags=["Goals"])
-###
 
 # ✅ Dummy in-memory storage
 GOALS = []
 NEXT_ID = 1
 
 @router.post("/")
-def create_goal(goal: dict):
+def create_goal(goal: dict, current_user : dict = Depends(get_current_user)):
     global NEXT_ID
     new_goal = {
         "id": NEXT_ID,
@@ -48,7 +29,7 @@ def create_goal(goal: dict):
     return {"message": "Goal created", "goal": new_goal}
 
 @router.get("/")
-def list_goals():
+def list_goals(current_user : dict = Depends(get_current_user)):
     goals_with_projection = []
 
     for g in GOALS:
@@ -67,7 +48,7 @@ def list_goals():
     return {"goals": goals_with_projection}
 
 @router.patch("/{goal_id}/progress")
-def update_goal_progress(goal_id: int, data: dict):
+def update_goal_progress(goal_id: int, data: dict, current_user : dict = Depends(get_current_user)):
     for g in GOALS:
         if g["id"] == goal_id:
             g["current_amount"] = data.get("current_amount",

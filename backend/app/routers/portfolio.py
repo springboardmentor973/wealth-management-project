@@ -1,13 +1,20 @@
-from fastapi import APIRouter   # Import APIRouter to create grouped APIs
+from fastapi import APIRouter, Depends   # Import APIRouter to create grouped APIs
+from core.security import get_current_user
+from sqlalchemy.orm import Session
+
+from database import get_db
+from models.investment import Investment
 
 # Create a router object for portfolio-related APIs
-router = APIRouter()
+router = APIRouter(
+    prefix ="/portfolio", 
+    tags = ["Portfolio"],
+)
 
 # This API handles GET requests at /portfolio/summary
 @router.get("/summary")
-def portfolio_summary():
-
-   
+def portfolio_summary(current_user : dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    investments = db.query(Investment).all()
     # Each item represents one asset in the portfolio
     assets = [
         {"asset": "AAPL", "quantity": 10, "price": 150},   # Apple stock
@@ -20,31 +27,45 @@ def portfolio_summary():
 
     # Variable to store total invested amount
     total_invested = 0
+    current_value = 0
+    assets = []
 
-    # Loop through each asset in the portfolio
-    for item in assets:
+    for inv in investments:
+        invested = inv.units * inv.avg_buy_price
+        market_value = inv.units * (inv.last_price or inv.avg_buy_price)
 
-        # Calculate invested amount for one asset
-        # Formula: quantity × price
-        invested_amount = item["quantity"] * item["price"]
+        total_invested += invested
+        current_value += market_value
 
-        # Add this asset's investment to total invested amount
-        total_invested += invested_amount
-
-        # Store asset-wise investment details
-        per_asset.append({
-            "asset": item["asset"],              # Asset name
-            "quantity": item["quantity"],        # Units purchased
-            "invested_amount": invested_amount   # Total invested for this asset
+        assets.append({
+            "symbol": inv.symbol,
+            "units": inv.units,
+            "invested": invested,
+            "current_value": market_value
         })
 
-    # Final response 
-    response = {
-        "total_invested": total_invested,           # Sum of all investments
-        "cost_basis": total_invested,                # Same as invested (simple version)
-        "current_value": total_invested + 5000,      # Mock current value (placeholder)
-        "per_asset": per_asset                       # Asset-wise breakdown
+    return {
+        "total_invested": total_invested,
+        "current_value": current_value,
+        "assets": assets
     }
 
-    # Return response as JSON
-    return response
+
+@router.get("/valuation")
+def portfolio_valuation(db: Session = Depends(get_db)):
+    investments = db.query(Investment).all()
+
+    total_invested = 0
+    current_value = 0
+
+    for inv in investments:
+        total_invested += inv.units * inv.avg_buy_price
+        current_value += inv.units * inv.last_price
+
+    profit_loss = current_value - total_invested
+
+    return {
+        "total_invested": total_invested,
+        "current_value": current_value,
+        "profit_loss": profit_loss
+    }
