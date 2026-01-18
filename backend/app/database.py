@@ -10,6 +10,8 @@ Base = declarative_base()
 from app.models.user import User
 from app.models.goal import Goal
 
+Base.metadata.create_all(bind=engine)
+
 def init_db():
     try:
         # Example: test connection
