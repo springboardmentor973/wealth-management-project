@@ -29,10 +29,9 @@ function Goals() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
-      <h2>Create Goal</h2>
-
-      <form onSubmit={handleSubmit}>
+    <div style={{ maxWidth: "500px", margin: "2rem auto", textAlign: "center" }}>
+      <h1>My Goals</h1>
+      <form onSubmit={addGoalHandler} style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
         <input
           type="text"
           placeholder="Goal title"
