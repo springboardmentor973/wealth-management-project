@@ -12,6 +12,11 @@ pwd_context = CryptContext(
 )
 
 def hash_password(password : str) -> str:
+    if len(password.encode("utf-8")) > 72:
+        raise HTTPException(
+            status_code=400,
+            detail="Password too long (max 72 characters)"
+        )
     return pwd_context.hash(password)
 
 def verify_password(plain : str, hashed : str) -> bool:
@@ -42,7 +47,7 @@ def decode_access_token(token):
 
 def get_current_user(token : str = Depends(oauth_scheme)):
     userData = decode_access_token(token)
-    if userData.get("user_id"):
+    if userData.get("user_id") is not None:
         return {"user_id" : userData["user_id"]}
     elif userData.get("email"):
         return {"email": userData["email"]}
