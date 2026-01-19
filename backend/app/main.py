@@ -3,9 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, goals
 # Import the database initialization function
 from app.database import init_db
+from app.routers import simulations
 
 
 app = FastAPI(title="Wealth Management API")
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -42,3 +44,4 @@ def task4():
 
 app.include_router(auth.router)
 app.include_router(goals.router)
+app.include_router(simulations.router)
