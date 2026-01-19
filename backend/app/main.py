@@ -5,7 +5,8 @@ from app.routers import auth, goals
 from app.database import init_db
 from app.models import goal,investment,user
 from app.routers import portfolio
-     
+from app.routers import simulations
+from app.routers import simulation
 
 
 
@@ -36,5 +37,5 @@ def portf():
 app.include_router(auth.router)
 app.include_router(goals.router)
 app.include_router(portfolio.router)
-#app.include_router(simulation.router)
-#app.include_router(simulations.router)
+app.include_router(simulation.router)
+app.include_router(simulations.router)
