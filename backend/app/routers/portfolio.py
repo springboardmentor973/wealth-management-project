@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends   # Import APIRouter to create grouped APIs
-from core.security import get_current_user
+from app.core.security import get_current_user
 from sqlalchemy.orm import Session
 
-from database import get_db
-from models.investment import Investment
+from app.database import get_db
+from app.models.investment import Investment
 
 # Create a router object for portfolio-related APIs
 router = APIRouter(

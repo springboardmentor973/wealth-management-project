@@ -6,7 +6,7 @@ from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 
-oauth_scheme =  OAuth2PasswordBearer(tokenUrl="login")
+oauth_scheme =  OAuth2PasswordBearer(tokenUrl="/auth/login")
 pwd_context = CryptContext(
     schemes=["bcrypt"]
 )
