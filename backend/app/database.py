@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker
 
 from app.models.base import Base
 from app.models.user import User
@@ -18,7 +18,7 @@ SessionLocal = sessionmaker(
     bind=engine
 )
 
-Base = declarative_base()
+#Base = declarative_base()
 
 
 def get_db():
