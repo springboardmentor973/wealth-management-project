@@ -1,58 +1,35 @@
-from passlib.context import CryptContext
-from jose import jwt
-from jose.exceptions import ExpiredSignatureError, JWTError
 from datetime import datetime, timedelta
-from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from fastapi.security import OAuth2PasswordBearer
+from jose import jwt, JWTError
+from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
 
-oauth_scheme =  OAuth2PasswordBearer(tokenUrl="login")
-pwd_context = CryptContext(
-    schemes=["bcrypt"]
-)
+from app.core.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 
-def hash_password(password : str) -> str:
-    return pwd_context.hash(password)
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-def verify_password(plain : str, hashed : str) -> bool:
-    return pwd_context.verify(plain, hashed)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
-def create_token(data : dict):
+
+def create_access_token(data: dict):
     to_encode = data.copy()
-    expire = datetime.now() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES or 30)
-    to_encode.update({"exp" : expire})
-    return jwt.encode(to_encode, SECRET_KEY, ALGORITHM)
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-def decode_access_token(token):
+
+def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
-        payload = jwt.decode(token, SECRET_KEY, [ALGORITHM])
-        return payload
-    except ExpiredSignatureError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token Expired",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("user_id")
+        if user_id is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid authentication token",
+            )
+        return {"user_id": user_id}
     except JWTError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token",
-            headers={"WWW-Authenticate": "Bearer"},
+            detail="Invalid authentication token",
         )
-
-def get_current_user(token : str = Depends(oauth_scheme)):
-    userData = decode_access_token(token)
-    if userData.get("user_id"):
-        return {"user_id" : userData["user_id"]}
-    elif userData.get("email"):
-        return {"email": userData["email"]}
-    else: 
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token payload",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-
-# Use this function to create a token 
-# token = create_token({'user_id': 1, 'email' : "sample-email"})
-# print(token)
