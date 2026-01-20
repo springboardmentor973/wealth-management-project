@@ -19,8 +19,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -29,7 +27,7 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-@app.get("/port") 
+@app.get("/port")
 def portf():
     return {"message": "Welcome to the Portfolio Management API"}
 

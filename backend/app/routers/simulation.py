@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
-from core.security import get_current_user
-from schemas.simulation import SimulationInput, SimulationResult
+from app.core.security import get_current_user
+from app.schemas.simulation import SimulationInput, SimulationResult
 
 router = APIRouter(
     prefix="/simulation", 

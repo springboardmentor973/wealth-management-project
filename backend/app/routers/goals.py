@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends
-from core.security import get_current_user
-from services.goal_projection import calculate_projection
-
+from app.core.security import get_current_user
+from app.services.goal_projection import calculate_projection
 #  Actual router (token is required to access)
 router = APIRouter(
     prefix="/goals",

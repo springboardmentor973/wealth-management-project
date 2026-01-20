@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Date, DateTime, ForeignKey
 from sqlalchemy.sql import func
-from base import Base
+from app.models.base import Base
 
 def get_base():
     return Base
