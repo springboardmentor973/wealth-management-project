@@ -1,7 +1,9 @@
 from sqlalchemy import Column, Integer, String, Numeric, ForeignKey, DateTime, Enum
 from sqlalchemy.sql import func
-from app.base import Base
 import enum
+
+from .base import Base
+
 
 class AssetType(enum.Enum):
     stock = "stock"
@@ -9,6 +11,7 @@ class AssetType(enum.Enum):
     mutual_fund = "mutual_fund"
     bond = "bond"
     cash = "cash"
+
 
 class Investment(Base):
     __tablename__ = "investments"
