@@ -25,4 +25,8 @@ class GoalResponse(BaseModel):
 
     class Config:
         from_attributes = True
-        
+
+class DashboardSummaryResponse(BaseModel):
+    total_net_worth: float
+    active_goals: int
+
