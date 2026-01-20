@@ -158,6 +158,10 @@ def portfolio_summary(
             "positions": []
         }
 
+    # List to store per-asset aggregation results
+    per_asset = []
+
+    # Variable to store total invested amount
     total_invested = 0
     current_value = 0
     positions = []

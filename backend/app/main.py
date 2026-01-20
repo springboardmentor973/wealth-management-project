@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, goals
 # Import the database initialization function
 from app.database import init_db
 from app.models import goal,investment,user
