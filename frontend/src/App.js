@@ -1,3 +1,5 @@
+import MarketData from "./pages/MarketData";
+
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -20,6 +22,8 @@ function App() {
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/portfolio">Portfolio</Link>
         <Link to="/goals">Goals</Link>
+        <Link to="/market">Market</Link>
+
       </nav>
 
       {/* Routes */}
@@ -29,6 +33,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/goals" element={<ProtectedRoute><Goals /></ProtectedRoute>} />
+        <Route path="/market" element={<MarketData />} />
+
 
         
       </Routes>
