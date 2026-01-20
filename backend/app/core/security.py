@@ -1,4 +1,7 @@
-from passlib.context import CryptContext
+import bcrypt
+import re
+import string
+import random
 from jose import jwt
 from jose.exceptions import ExpiredSignatureError, JWTError
 from datetime import datetime, timedelta
@@ -7,9 +10,20 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 
 oauth_scheme =  OAuth2PasswordBearer(tokenUrl="/auth/login")
-pwd_context = CryptContext(
-    schemes=["bcrypt"]
-)
+
+def validate_password_strength(password: str):
+    if len(password) < 8:
+        raise HTTPException(status_code=400, detail="Password must be at least 8 characters long")
+    if not re.search(r"[A-Z]", password):
+        raise HTTPException(status_code=400, detail="Password must contain at least one uppercase letter")
+    if not re.search(r"\d", password):
+        raise HTTPException(status_code=400, detail="Password must contain at least one digit")
+    if not re.search(r"[@$!%*?&]", password):
+        raise HTTPException(status_code=400, detail="Password must contain at least one special character (@$!%*?&)")
+
+def generate_random_string(length=8):
+    chars = string.ascii_letters + string.digits
+    return ''.join(random.choice(chars) for _ in range(length))
 
 def hash_password(password : str) -> str:
     if len(password.encode("utf-8")) > 72:
@@ -17,10 +31,15 @@ def hash_password(password : str) -> str:
             status_code=400,
             detail="Password too long (max 72 characters)"
         )
-    return pwd_context.hash(password)
+    pwd_bytes = password.encode('utf-8')
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(pwd_bytes, salt).decode('utf-8')
 
 def verify_password(plain : str, hashed : str) -> bool:
-    return pwd_context.verify(plain, hashed)
+    try:
+        return bcrypt.checkpw(plain.encode('utf-8'), hashed.encode('utf-8'))
+    except ValueError:
+        return False
 
 def create_token(data : dict):
     to_encode = data.copy()

@@ -52,7 +52,7 @@ def portfolio_summary(current_user : dict = Depends(get_current_user), db: Sessi
 
 
 @router.get("/valuation")
-def portfolio_valuation(db: Session = Depends(get_db)):
+def portfolio_valuation(current_user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
     investments = db.query(Investment).all()
 
     total_invested = 0
