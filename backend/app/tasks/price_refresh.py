@@ -1,12 +1,8 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
 from datetime import datetime
 import yfinance as yf
 
-from app.database import SessionLocal
-from app.models.investment import Investment
+from ..database import SessionLocal
+from ..models.investment import Investment
 
 
 def get_market_price(symbol: str):
@@ -21,6 +17,9 @@ def refresh_prices():
         print(f"Found {len(investments)} investments")
 
         for inv in investments:
+            if not inv.symbol:
+                continue
+
             price = get_market_price(inv.symbol)
             if price:
                 inv.last_price = price
