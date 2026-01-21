@@ -1,24 +1,15 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker
 
-from app.models.base import Base
-from app.models.user import User
-from app.models.goal import Goal
-from app.models.transaction import Transaction
+from .models.base import Base
+from .models.user import User
+from .models.goal import Goal
+from .models.investment import Investment
 
-# DATABASE_URL = "postgresql://postgres:Welcome%40123@localhost:5432/wealth_database"
-DATABASE_URL = "postgresql://neondb_owner:npg_Bh72oWsTzZGu@ep-old-dream-a1dzhm8q-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-
+DATABASE_URL = "postgresql://postgres:kiranm5@localhost:5432/wealth_db"
 
 engine = create_engine(DATABASE_URL)
-
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
-
-Base = declarative_base()
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def get_db():
