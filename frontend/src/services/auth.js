@@ -8,3 +8,18 @@ export async function login(email, password) {
     throw error.response?.data?.detail || "Login failed";
   }
 }
+
+
+export function getToken() {
+  return localStorage.getItem("token");
+}
+
+export function getCurrentUser() {
+  const user = localStorage.getItem("user");
+  return user ? JSON.parse(user) : null;
+}
+
+export function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+}
