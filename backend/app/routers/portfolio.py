@@ -134,10 +134,6 @@ def add_transaction(
     db.refresh(investment)
     return {"message": "Transaction recorded"}
 
-
-# -------------------------------
-# Portfolio Summary
-# -------------------------------
 # -------------------------------
 # Portfolio Summary
 # -------------------------------
