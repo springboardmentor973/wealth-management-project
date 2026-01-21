@@ -1,8 +1,11 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from datetime import datetime
-from app.database import Base
+from app.models.base import Base
 
-class User(Base):
+def get_base():
+    return Base
+
+class User(get_base()):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -11,3 +14,5 @@ class User(Base):
     password_hash = Column(String(255), nullable=False)
     risk_profile = Column(String(50), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow,nullable=False)
+    is_verified = Column(Boolean, default=False)
+    verification_code = Column(String(10), nullable=True)

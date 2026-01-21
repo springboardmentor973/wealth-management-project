@@ -5,11 +5,17 @@ from app.base import Base
 from app.models.user import User
 from app.models.goal import Goal
 from app.models.transaction import Transaction
+from app.models.simulation import Simulation
 
 DATABASE_URL = "postgresql://postgres:Ak%4026042004@localhost:5432/wealth_database"
 
 engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
 
 def get_db():
     db = SessionLocal()
@@ -20,4 +26,3 @@ def get_db():
 
 def init_db():
     Base.metadata.create_all(bind=engine)
-

@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
 from sqlalchemy.sql import func
 
-from app.base import Base
+from app.models.base import Base
 
 
 class Transaction(Base):
@@ -9,9 +9,10 @@ class Transaction(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     symbol = Column(String, nullable=False)
-    type = Column(String, nullable=False)  # buy/sell/dividend/contribution
-    quantity = Column(Float, nullable=False)
-    price = Column(Float, nullable=False)
-    fees = Column(Float, default=0)
+    type = Column(String, nullable=False)
+    quantity = Column(Float, nullable=True)
+    price = Column(Float, nullable=True)
+    fees = Column(Float, nullable=True)
     executed_at = Column(DateTime(timezone=True), server_default=func.now())
-    user_id = Column(Integer, ForeignKey("users.id"))
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+

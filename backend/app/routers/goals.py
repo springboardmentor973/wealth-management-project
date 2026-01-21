@@ -6,12 +6,11 @@ from app.database import get_db
 from app.models.goal import Goal
 from app.schemas.goal import GoalCreate, GoalProgressUpdate, GoalResponse
 
-
-
 router = APIRouter(
     prefix="/goals",
     tags=["Goals"]
 )
+
 
 @router.post("/", response_model=GoalResponse)
 def create_goal(goal: GoalCreate, db: Session = Depends(get_db)):
@@ -21,9 +20,11 @@ def create_goal(goal: GoalCreate, db: Session = Depends(get_db)):
     db.refresh(new_goal)
     return new_goal
 
+
 @router.get("/", response_model=List[GoalResponse])
 def get_goals(db: Session = Depends(get_db)):
     return db.query(Goal).all()
+
 
 @router.put("/{goal_id}", response_model=GoalResponse)
 def update_goal(goal_id: int, goal: GoalProgressUpdate, db: Session = Depends(get_db)):
@@ -50,6 +51,3 @@ def delete_goal(goal_id: int, db: Session = Depends(get_db)):
     db.delete(db_goal)
     db.commit()
     return {"message": "Goal deleted successfully"}
-
-
-
