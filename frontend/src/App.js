@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import ProtectedRoute from "./Components/ProtectedRoute";
-
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Portfolio from "./pages/Portfolio";
 import Goals from "./pages/Goals";
 import MarketData from "./pages/MarketData";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -28,12 +28,15 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/portfolio" element={<Portfolio />} />
 
-        {/* Protected routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/goals" element={<Goals />} />
-        </Route>
+        <Route
+          path="/goals"
+          element={
+            <ProtectedRoute>
+              <Goals />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* Market data page */}
         <Route path="/market" element={<MarketData />} />
       </Routes>
     </BrowserRouter>
@@ -41,4 +44,3 @@ function App() {
 }
 
 export default App;
-
