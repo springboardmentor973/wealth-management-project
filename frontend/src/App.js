@@ -1,21 +1,18 @@
-import MarketData from "./pages/MarketData";
-
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-// Import components
-import ProtectedRoute from './Components/ProtectedRoute';
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Portfolio from "./pages/Portfolio";
 import Goals from "./pages/Goals";
+import MarketData from "./pages/MarketData";
 
 function App() {
   return (
     <BrowserRouter>
-      {/* Navigation Links */}
       <nav style={{ display: "flex", gap: "1rem", margin: "1rem" }}>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
@@ -23,23 +20,25 @@ function App() {
         <Link to="/portfolio">Portfolio</Link>
         <Link to="/goals">Goals</Link>
         <Link to="/market">Market</Link>
-
       </nav>
 
-      {/* Routes */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/goals" element={<ProtectedRoute><Goals /></ProtectedRoute>} />
+
+        {/* Protected routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/goals" element={<Goals />} />
+        </Route>
+
+        {/* Market data page */}
         <Route path="/market" element={<MarketData />} />
-
-
-        
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
