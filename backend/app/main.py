@@ -32,9 +32,10 @@ def health():
 def database():
     return {"status": "DB connected & backend running"}
 
-@app.get("/port")
+@app.get("/portfolio")
 def port():
-    return {"message": "Welcome to the Portfolio Management API"}
+    return {"status": "Portfolio endpoint working"}
+
 
 app.include_router(auth.router)
 app.include_router(goals.router)
